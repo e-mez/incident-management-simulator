@@ -29,6 +29,10 @@
 #   MVNW_VERBOSE - true: enable verbose log; debug: trace the mvnw script; others: silence the output
 # ----------------------------------------------------------------------------
 
+if [ -z "${JAVA_HOME-}" ] && [ -d "/usr/lib/jvm/java-21-openjdk-amd64" ]; then
+  export JAVA_HOME="/usr/lib/jvm/java-21-openjdk-amd64"
+fi
+
 set -euf
 [ "${MVNW_VERBOSE-}" != debug ] || set -x
 
@@ -43,6 +47,9 @@ esac
 
 # set JAVACMD and JAVACCMD
 set_java_home() {
+  if [ -z "${JAVA_HOME-}" ] && [ -d "/usr/lib/jvm/java-21-openjdk-amd64" ]; then
+    JAVA_HOME="/usr/lib/jvm/java-21-openjdk-amd64"
+  fi
   # For Cygwin and MinGW, ensure paths are in Unix format before anything is touched
   if [ -n "${JAVA_HOME-}" ]; then
     if [ -x "$JAVA_HOME/jre/sh/java" ]; then
